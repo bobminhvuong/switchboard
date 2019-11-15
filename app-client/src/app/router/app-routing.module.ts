@@ -24,7 +24,7 @@ const routes: Routes = [
     declarations: [],
     imports: [
         CommonModule,
-        RouterModule.forRoot(routes, { enableTracing: true })
+        RouterModule.forRoot(routes, { useHash: true })
     ]
 })
 export class AppRoutingModule { }

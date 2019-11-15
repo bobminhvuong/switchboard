@@ -33,6 +33,7 @@ registerLocaleData(en);
     LoginComponent,
     TableComponent,
     SwitchboardComponent,
+    ImageCtrComponent
   ],
   imports: [
     BrowserModule,

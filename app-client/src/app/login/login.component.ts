@@ -8,12 +8,12 @@ import { NzMessageService } from 'ng-zorro-antd/message'
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  private user = {
-    usershop:'iostest',
-    user:'',
-    password:''
+  public user = {
+    usershop: 'iostest',
+    user: '',
+    password: ''
   };
-  constructor(private router: Router, private loginSV: LoginService,private message: NzMessageService) { }
+  constructor(private router: Router, private loginSV: LoginService, private message: NzMessageService) { }
 
   ngOnInit() {
     if (localStorage.getItem('user')) {
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loginSV.login(this.user).subscribe(r => {
-      if (r && r.status==1) {
+      if (r && r.status == 1) {
         localStorage.setItem('user', r.data);
         this.router.navigate(['/manager']);
       } else {

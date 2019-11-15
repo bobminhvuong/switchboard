@@ -2,21 +2,27 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var querystring = require('querystring');
 const axios = require('axios');
+var config = require('./config');
 var app = express();
 var cors = require('cors');
-var http = require("http");
+var path = require("path");
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 app.use(cors())
 
-app.post('/api/nhanvien/login', function(req,res){
-   axios.post('http://services.quanlyshop.vn/api/nhanvien/login',req.body).then(r=>{
-        if(r) res.send(r.data);    
-   }).catch(r=>{
-        if(r) res.send(r.response.data);  
-   })
+app.use(express.static(path.join(__dirname,'app-client/dist')));
+
+
+app.post('/api/nhanvien/login', function (req, res) {
+     axios.post('http://services.quanlyshop.vn/api/nhanvien/login', req.body).then(r => {
+          if (r) res.send(r.data);
+     }).catch(r => {
+          if (r) res.send(r.response.data);
+     })
+});
+app.get('/',function(req,res) {
+     res.sendFile(path.join(__dirname + '/app-client/dist/index.html'));
 });
 
-app.listen(3000);
-console.log(`serve is listening port ${3000}`)
+app.listen(process.env.PORT || config.PORT, console.log('server is listening port ' + config.PORT));
