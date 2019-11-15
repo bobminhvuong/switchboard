@@ -1,13 +1,17 @@
 import { HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { throwError } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MainService {
   private token = localStorage.getItem('token');
-  constructor() { }
+  private origin = '';
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    this.origin = this.document.location.origin;
+   }
 
   getHttpOptions() {
     const httpOptions = {
@@ -29,7 +33,7 @@ export class MainService {
   }
 
   host() {
-    return 'http://localhost:3000';
+    return  this.origin;
   }
 
   host1() {

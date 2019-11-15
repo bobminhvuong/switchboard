@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
+import { environment } from './../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class LoginService {
 
   login(data): Observable<any> {
     const host = this.mainSV.host();
-    return this.http.post(host + '/api/nhanvien/login', data, this.mainSV.getHttpOptionsNotToken())
+    return this.http.post(environment.APIEndpoint + '/api/nhanvien/login', data, this.mainSV.getHttpOptionsNotToken())
       .pipe(
         catchError(this.mainSV.handleError)
       );
