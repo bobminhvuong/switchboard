@@ -6,7 +6,8 @@ import * as io from 'socket.io-client';
   providedIn: 'root'
 })
 export class SwitchboardService {
-  private url = 'http://222.255.115.84:8000';
+  // private url = 'http://222.255.115.84:8000';
+  private url = '222.255.115.84:8000';
   private key = '90a0ba95ec0c5d33fbdd342aec08bdce979ab724';
   private socket;
 
