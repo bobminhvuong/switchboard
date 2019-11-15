@@ -13,8 +13,7 @@ export class LoginService {
   constructor(private http: HttpClient, private mainSV: MainService) { }
 
   login(data): Observable<any> {
-    const host = this.mainSV.host();
-    return this.http.post(environment.APIEndpoint + '/api/nhanvien/login', data, this.mainSV.getHttpOptionsNotToken())
+    return this.http.post(environment.APIHOST + '/api/nhanvien/login', data, this.mainSV.getHttpOptionsNotToken())
       .pipe(
         catchError(this.mainSV.handleError)
       );
