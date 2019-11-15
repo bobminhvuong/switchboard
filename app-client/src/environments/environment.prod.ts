@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  APIEndpoint: 'http://localhost:3000'
+  APIEndpoint: 'https://ancungfriend.herokuapp.com'
 };
