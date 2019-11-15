@@ -7,15 +7,15 @@ import * as io from 'socket.io-client';
 })
 export class SwitchboardService {
   private url = 'http://222.255.115.84:8000';
-  private key= '90a0ba95ec0c5d33fbdd342aec08bdce979ab724';
+  private key = '90a0ba95ec0c5d33fbdd342aec08bdce979ab724';
   private socket;
 
   constructor() {
     this.socket = io(this.url);
   }
 
-  public signSocket(){
-    this.socket.emit('sign', '90a0ba95ec0c5d33fbdd342aec08bdce979ab72');
+  public signSocket() {
+    this.socket.emit('sign', this.key);
   }
 
   public connection() {
