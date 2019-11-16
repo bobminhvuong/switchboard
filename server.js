@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 app.use(cors())
 
-app.use(express.static(path.join(__dirname,'app-client/dist')));
+app.use(express.static(path.join(__dirname, 'app-client/dist')));
 
 
 app.post('/api/nhanvien/login', function (req, res) {
@@ -21,7 +21,38 @@ app.post('/api/nhanvien/login', function (req, res) {
           if (r) res.send(r.response.data);
      })
 });
-app.get('/',function(req,res) {
+
+app.post('/api/voip/getcustomer', function (req, res){
+     let data = req.body;
+     data.api = config.api;
+     axios.post('http://services.quanlyshop.vn/api/voip/getcustomer',req.body).then(r=>{
+          if (r) res.send(r.data);
+     }).catch(r => {
+          if (r) res.send(r.response.data);
+     })
+});
+
+app.post('/api/voip/gethistory', function (req, res){
+     let data = req.body;
+     data.api = config.api;
+     axios.post('http://services.quanlyshop.vn/api/voip/gethistory',req.body).then(r=>{
+          if (r) res.send(r.data);
+     }).catch(r => {
+          if (r) res.send(r.response.data);
+     })
+});
+
+app.post('/api/voip/getOrderDetail', function (req, res){
+     let data = req.body;
+     data.api = config.api;
+     axios.post('http://services.quanlyshop.vn/api/voip/getOrderDetail',req.body).then(r=>{
+          if (r) res.send(r.data);
+     }).catch(r => {
+          if (r) res.send(r.response.data);
+     })
+});
+
+app.get('/', function (req, res) {
      res.sendFile(path.join(__dirname + '/app-client/dist/index.html'));
 });
 
