@@ -24,7 +24,7 @@ app.post('/api/nhanvien/login', function (req, res) {
 
 app.post('/api/voip/getcustomer', function (req, res){
      let data = req.body;
-     data.api = config.api;
+     data.api = config.API;
      axios.post('http://services.quanlyshop.vn/api/voip/getcustomer',req.body).then(r=>{
           if (r) res.send(r.data);
      }).catch(r => {
@@ -34,7 +34,7 @@ app.post('/api/voip/getcustomer', function (req, res){
 
 app.post('/api/voip/gethistory', function (req, res){
      let data = req.body;
-     data.api = config.api;
+     data.api = config.API;
      axios.post('http://services.quanlyshop.vn/api/voip/gethistory',req.body).then(r=>{
           if (r) res.send(r.data);
      }).catch(r => {
@@ -44,7 +44,7 @@ app.post('/api/voip/gethistory', function (req, res){
 
 app.post('/api/voip/getOrderDetail', function (req, res){
      let data = req.body;
-     data.api = config.api;
+     data.api = config.API;
      axios.post('http://services.quanlyshop.vn/api/voip/getOrderDetail',req.body).then(r=>{
           if (r) res.send(r.data);
      }).catch(r => {

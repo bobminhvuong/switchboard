@@ -22,19 +22,23 @@ export class SwitchboardComponent implements OnInit {
     this.switchboardSV.onResponse().subscribe(r => {
       console.log('response', r);
 
-      let index = this.listCall.findIndex(e => { return e.id == r.id });
-      let indexHas = this.listCall.findIndex(e => { return e.id == r.id });
+      let index = this.listCall.findIndex(e => { return e.phone == r.phone });
+      let indexHas = this.listCall.findIndex(e => { return e.phone == r.phone });
 
-      if (r.state == 'Ring' || index < 0) {
+      console.log('index', index);
+      console.log('indexHas', indexHas);
+
+
+      if (((r.state == 'Ring' || r.state == 'Ringing') && index < 0) || index < 0) {
         this.switchboardSV.getCustomer(r.phone).subscribe(cus => {
           if (cus.status == 1) {
-            r.customer_id = cus.id;
-            r.name = cus.name;
-            r.group_name = cus.group_name;
-            r.money = cus.money;
+            r.customer_id = cus.data.id;
+            r.name = cus.data.name;
+            r.group_name = cus.data.group_name;
+            r.money = cus.data.money;
             this.listCall.unshift(r);
             this.listHasCall.unshift(r);
-          }else{
+          } else {
             r.customer_id = 0;
             r.name = '';
             r.group_name = '';
@@ -42,13 +46,15 @@ export class SwitchboardComponent implements OnInit {
             this.listCall.unshift(r);
             this.listHasCall.unshift(r);
           }
-        })
-      }else{
-        this.listHasCall[indexHas].state =r.state;
-        this.listHasCall[indexHas].type =r.type;
-        this.listCall[index].state =r.state;
-        this.listCall[indexHas].type =r.type;
+
+          console.log('cus r',r);
+        });
+      } else {
+        this.listHasCall[indexHas].state = r.state;
+        this.listHasCall[indexHas].type = r.type;
+        this.listCall[index].state = r.state;
+        this.listCall[indexHas].type = r.type;
       }
-    })
+    });
   }
 }
