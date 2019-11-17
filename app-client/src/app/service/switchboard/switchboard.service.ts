@@ -69,6 +69,4 @@ export class SwitchboardService {
         catchError(this.mainSV.handleError)
       );
   }
-
-
 }

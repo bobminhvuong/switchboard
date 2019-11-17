@@ -4,48 +4,122 @@
     <div class="col-12 col-sm-12 col-md-7 col-lg-7">
       <div class="box box-success">
         <div class="box-header">
-          <b>Cuộc gọi đến</b>
+          <b>Cuộc gọi</b>
         </div>
         <div class="box-body">
           <div class="row listCus">
-            <div *ngFor="let item of listCall"  class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-              <div class="thumbnail">
-                <div style="width: 100%; height: 150px;">
-                  <img style="width: 100%; max-height: 150px;" src="https://photo-3-baomoi.zadn.vn/w1000_r1/2019_07_24_180_31578755/6a08480e114ef810a15f.jpg">
-                </div>
-                <div class="caption">
-                  <div class="row" style="text-align: center">
-                    <span class="">{{ item.state }}...</span>
-                  </div>
-
-                  <h4><i class="fa fa-user"></i> {{ item.name }}</h4> 
-                  <div class="row" style="text-align:center">
-                    <span>
-                        <img width="22" height="22" src="./assets/images/phoneup.png" alt=""> <span
-                        style="font-weight: bold" class="text-primary"
-                        ng-repeat="line in item.line_connected">{{item.extend}}</span> </span>
-                  </div>
-
-                  <h5><i class="fa fa-phone"></i> {{ item.phone }}</h5>
-                  <h5 class="spill" data-toggle="tooltip" data-placement="top" title="{{item.address}}">
-                    <i class="glyphicon glyphicon-map-marker"></i> {{ item.address }}
-                  </h5>
-
+            <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+              <div class="card">
+                <img class="card-img-top" style="max-height:150px"
+                  src="https://photo-3-baomoi.zadn.vn/w1000_r1/2019_07_24_180_31578755/6a08480e114ef810a15f.jpg"
+                  alt="Card image cap">
+                <div class="card-body" style="padding-top: 5px;">
                   <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
 
-                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                      <button style="float:right"  class="btn btn-xs btn-success">
-                        <i style="font-size: 15px" class="fa fa-calendar"></i> </button>
+                      <span class="ringing"><img style="margin-right: 3px;" width="16" height="16"
+                          src="./assets/images/incoming.png" alt=""> Ringing...</span>
                     </div>
-                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" style="text-align: center">
-                      <button 
-                        class="btn btn-xs btn-primary"> <i style="font-size: 15px" class="fa fa-cart-plus"></i>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                      <span><img width="22" height="22" src="./assets/images/phoneup.png" alt="">
+                        <span style="font-weight: bold;margin-top: 2px;" class="text-primary">306</span>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="row mg-t-5">
+                    <i class="text-primary mg-icon" nz-icon nzType="user" nzTheme="outline"></i>
+                    <h6 class="card-title mg-l-5" style="margin-bottom: 0px !important;font-size: 18px;">Nguyễn văn a
+                    </h6>
+                  </div>
+
+                  <div class="row mg-t-5">
+                    <span class="badge badge-success">50000000 đ</span>
+                  </div>
+
+                  <div class="row mg-t-5">
+                    <i class="mg-icon text-primary" nz-icon [nzType]="'phone'"></i>
+                    <span class="mg-l-5">
+                      0399994511
+                    </span>
+                  </div>
+
+                  <div class="row mg-t-5">
+                    <i class="mg-icon text-primary" nz-icon [nzType]="'home'"></i>
+                    <span class="mg-l-5">
+                      610 hà huy giáp - quận 12
+                    </span>
+                  </div>
+
+                  <div class="row mg-t-10">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                      <button class="btn btn-success btn-sm "><i class="fa fa-shopping-cart"></i> Đơn hàng</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+
+            <div *ngFor="let item of listCall" class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+              <div class="card" style="margin-top: 10px;">
+                <img class="card-img-top" style="max-height:150px"
+                  src="https://photo-3-baomoi.zadn.vn/w1000_r1/2019_07_24_180_31578755/6a08480e114ef810a15f.jpg"
+                  alt="Card image cap">
+                <div class="card-body" style="padding-top: 5px;">
+                  <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                      <span class=""
+                        [ngClass]="{ 'ringing': (item.state == 'Ringing' || item.state == 'Ring'), 'up' : item.state == 'Up', 'handup':item.state == 'Hangup' }">
+                        <img *ngIf="item.type=='inbound'" style="margin-right: 3px;" width="16" height="16"
+                          src="./assets/images/incoming.png" alt="">
+                        <img *ngIf="item.type=='outbound'" style="margin-right: 3px;" width="16" height="16"
+                          src="./assets/images/outgoing.png" alt="">
+
+                        {{ item.state }}...</span>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                      <span>
+                        <img *ngIf="item.state=='Up'" width="22" height="22" src="./assets/images/phoneup.png" alt="">
+                        <img *ngIf="item.state=='Ringing' || item.state=='Ring'" width="22" height="22"
+                          src="./assets/images/phoneringring.png" alt="">
+                        <img *ngIf="item.state=='Hangup'" width="22" height="22" src="./assets/images/phonestop.png"
+                          alt="">
+                        <span style="font-weight: bold;margin-top: 2px;" class="text-primary">{{item.extend}}</span>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="row mg-t-5">
+                    <i class="text-primary mg-icon" nz-icon nzType="user" nzTheme="outline"></i>
+                    <h6 class="card-title mg-l-5" style="margin-bottom: 0px !important;font-size: 18px;">{{ item.name }}
+                    </h6>
+                  </div>
+
+                  <div class="row mg-t-5">
+                    <span class="badge badge-success">{{formatNumber(item.money)}} đ</span>
+                  </div>
+
+                  <div class="row mg-t-5">
+                    <i class="mg-icon text-primary" nz-icon [nzType]="'phone'"></i>
+                    <span class="mg-l-5">
+                      {{item.phone}}
+                    </span>
+                  </div>
+
+                  <div class="row mg-t-5">
+                    <i class="mg-icon text-primary" nz-icon [nzType]="'home'"></i>
+                    <span class="mg-l-5">
+                      {{item.address}}
+                    </span>
+                  </div>
+
+                  <div class="row mg-t-10">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
+                      <button (click)="getHistoryCart(item)" [disabled]="item.customer_id==0"
+                        class="btn btn-success btn-sm ">
+                        <i class="fa fa-shopping-cart"></i> Đơn hàng
                       </button>
-                    </div>
-
-                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                      <button ng-disabled="item.customer_id == 0" class="btn btn-xs"
-                        style="float:left"> <i style="font-size: 15px" class="fa fa-history"></i> </button>
                     </div>
                   </div>
                 </div>
@@ -60,11 +134,149 @@
     <div class="col-12 col-sm-12 col-md-5 col-lg-5">
       <div class="box box-success">
         <div class="box-header">
+          <b>Danh sách cuộc gọi</b>
+        </div>
 
+        <div class="box-body">
+
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th class="text-center">Thời gian</th>
+                  <th>Tên khách hàng</th>
+                  <th class="text-center">Điện thoại</th>
+                  <th class="text-center">Cuộc gọi</th>
+                  <th class="text-center">Thao tác</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of listHasCall">
+                  <td class="text-center">{{item.time ? item.time : ''}}</td>
+                  <td>{{item.name}}</td>
+                  <td class="text-center">{{item.phone}}</td>
+                  <td class="text-center">
+                    <img *ngIf="item.type=='inbound'" style="margin-right: 3px;" width="16" height="16"
+                      src="./assets/images/incoming.png" alt="">
+
+                    <img *ngIf="item.type=='outbound'" style="margin-right: 3px;" width="16" height="16"
+                      src="./assets/images/outgoing.png" alt="">
+
+                    <strong>{{item.extend}}</strong>
+                  </td>
+                  <td class="text-center">
+                    <button class="btn btn-sm" (click)="getHistoryCart(item)" [disabled]="item.customer_id==0"
+                      [ngClass]="{'btn-success': item.customer_id != 0,'btn-secondary': item.customer_id == 0}">
+                      <i class="fa fa-shopping-cart"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-
-
   </div>
+
+  <nz-modal [(nzVisible)]="isVisible" [nzWidth]="1000" [nzTitle]="modalTitle" [nzContent]="modalContent"
+    [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()">
+    <ng-template #modalTitle>
+      Lịch sử khách hàng: {{currentCus.name}}
+    </ng-template>
+
+    <ng-template #modalContent>
+
+      <div class="table-responsive">
+        <!-- <div class="box box-success"> -->
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="text-center">STT</th>
+              <th class="text-center">Ngày</th>
+              <th class="text-center">Người tạo</th>
+              <th class="text-center">Loại</th>
+              <th>Ghi chú</th>
+              <th class="text-center">Thanh toán</th>
+              <th class="text-center">Giảm giá</th>
+              <th class="text-center">Tổng tiền</th>
+              <th class="text-center">Thao tác</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="listOrder.length == 0">
+            <tr>
+              <td colspan="9" class="text-center">
+                <nz-empty></nz-empty>
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngFor="let item of listOrder;index as i">
+            <tr>
+              <td class="text-center">{{ i +1}}</td>
+              <td class="text-center"> {{formatDate(item.created,'DD/MM/YYYY')}} </td>
+              <td> {{ item.created_by }} </td>
+              <td class="text-center"> {{ item.order_type }} </td>
+              <td> {{ item.note }} </td>
+              <td class="text-center">
+                <span class="badge badge-primary">
+                  {{ item.payment_type }}
+                </span></td>
+              <td class="text-center"> {{item.discount}} %</td>
+              <td class="float-right"> {{ formatNumber(item.total)}} </td>
+              <td class="text-center">
+
+                <span (click)="getOrderDetail(item.id)" class="badge badge-success"><i class="fas fa-info"></i> Chi
+                  tiết</span>
+              </td>
+            </tr>
+            <tr *ngIf="isOrderDetail == item.id">
+              <td colspan="9" style="background: #f1f5f0 !important">
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                    <div class="table-responsive">
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th class="text-center">STT</th>
+                            <th>Sản phẩm</th>
+                            <th class="text-center">Mã sản phẩm</th>
+                            <th class="text-center">Số lượng</th>
+                            <th class="text-center">Giá tiền</th>
+                          </tr>
+                        </thead>
+                        <tbody *ngIf="orderDetail.length == 0">
+                          <tr>
+                            <td colspan="5" class="text-center">
+                              <nz-empty></nz-empty>
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tbody *ngIf="orderDetail.length > 0">
+                          <tr *ngFor="let item of orderDetail;index as i">
+                            <td class="text-center">{{ i+1 }}</td>
+                            <td>{{ item.product_name }}</td>
+                            <td class="text-center">{{ item.product_code }}</td>
+                            <td class="text-center">{{ item.quantity }}</td>
+                            <td class="float-right">{{ formatNumber(item.price) }} đ</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- </div> -->
+      </div>
+
+    </ng-template>
+
+    <ng-template #modalFooter>
+      <button nz-button nzType="default" (click)="handleCancel()">Đóng</button>
+    </ng-template>
+  </nz-modal>
 </div>

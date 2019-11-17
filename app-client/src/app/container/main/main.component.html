@@ -1,6 +1,6 @@
 <nz-layout>
   <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="triggerTemplate">
-    <div class="logo">DVD MANAGE</div>
+    <div class="logo "></div>
     <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
       <li nz-menu-item [routerLink]="['/manager/dashboard']">
         <span><i nz-icon type="home"></i><span class="nav-text">Trang chủ</span></span>
@@ -28,10 +28,8 @@
     <nz-content style="margin:0 16px;">
       <nz-breadcrumb style="margin:16px 0;">
       </nz-breadcrumb>
-      <div style="padding:24px; background: #fff; min-height: 360px;">
-
+      <div style="min-height: 360px;">
         <router-outlet></router-outlet>
-
       </div>
     </nz-content>
   </nz-layout>
