@@ -22,7 +22,11 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    console.log(this.user);
+    
     this.loginSV.login(this.user).subscribe(r => {
+      console.log(r);
+      
       if (r && r.status == 1) {
         localStorage.setItem('user', r.data);
         this.router.navigate(['/manager']);

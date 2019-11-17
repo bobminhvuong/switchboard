@@ -1,4 +1,4 @@
-<div class="limiter">
+<!-- <div class="limiter">
   <div class="container-login100">
     <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
       <form class="login100-form validate-form flex-sb flex-w">
@@ -38,6 +38,39 @@
             Login
           </button>
         </div>
+      </form>
+    </div>
+  </div>
+</div> -->
+
+<div class="login-container lightmode">
+
+  <div class="login-box animated fadeInDown">
+    <!-- <div class="login-logo"></div> -->
+    <div class="login-body">
+      <div class="login-title text-center"><strong>Đăng nhập</strong> </div>
+      <form action="index.html" class="form-horizontal" method="post">
+        <div class="form-group">
+          <div class="col-md-12">
+            <input [(ngModel)]="user.user" type="text" class="form-control" placeholder="Tài khoản" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            <input type="password" [(ngModel)]="user.password"  class="form-control" placeholder="Mật khẩu" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12">
+            <input type="text" class="form-control" placeholder="Cửa hàng" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-6">
+            <button (click)="login()"  class="btn btn-info btn-block">Log In</button>
+          </div>
+        </div>
+
       </form>
     </div>
   </div>
