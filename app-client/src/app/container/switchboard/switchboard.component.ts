@@ -134,28 +134,18 @@ export class SwitchboardComponent implements OnInit {
     })
     this.switchboardSV.onResponse().subscribe(r => {
       let index = this.listCall.findIndex(e => { return e.phone == r.phone });
-      let indexHas = this.listCall.findIndex(e => { return e.phone == r.phone });
+      let indexHas = this.listHasCall.findIndex(e => { return e.phone == r.phone });
       r.timeOut = new Date();
 
       if (((r.state == 'Ring' || r.state == 'Ringing') && index < 0) || index < 0) {
-        this.switchboardSV.getCustomer(r.phone).subscribe(cus => {
-          r.time = moment().format('HH:mm');
-          if (cus.status == 1) {
-            r.customer_id = cus.data.id;
-            r.name = cus.data.name;
-            r.group_name = cus.data.group_name;
-            r.money = cus.data.money;
-            this.listCall.unshift(r);
-            this.listHasCall.unshift(r);
-          } else {
-            r.customer_id = 0;
-            r.name = '';
-            r.group_name = '';
-            r.money = 0;
-            this.listCall.unshift(r);
-            this.listHasCall.unshift(r);
-          }
-        });
+        r.time = moment().format('HH:mm');
+        r.customer_id = 0;
+        r.name = '';
+        r.group_name = '';
+        r.money = 0;
+        this.listCall.unshift(r);
+        this.listHasCall.unshift(r);
+        this.getCustomer(r.phone);
       } else {
         this.listHasCall[indexHas].state = r.state;
         this.listCall[index].state = r.state;
@@ -163,6 +153,27 @@ export class SwitchboardComponent implements OnInit {
     });
 
     this.setTimeClose();
+  }
+
+  getCustomer(phone) {
+    this.switchboardSV.getCustomer(phone).subscribe(cus => {
+      if (cus.status == 1) {
+        console.log('cus',cus);
+        
+        let index = this.listCall.findIndex(e => { return e.phone == phone });
+        let indexHas = this.listCall.findIndex(e => { return e.phone == phone });
+        this.listCall[index].customer_id = cus.data.id;
+        this.listCall[index].name = cus.data.name;
+        this.listCall[index].group_name = cus.data.group_name;
+        this.listCall[index].money = cus.data.money;
+
+        this.listHasCall[index].customer_id = cus.data.id;
+        this.listHasCall[index].name = cus.data.name;
+        this.listHasCall[index].group_name = cus.data.group_name;
+        this.listHasCall[index].money = cus.data.money;
+       
+      } 
+    });
   }
 
   formatNumber(num) {
