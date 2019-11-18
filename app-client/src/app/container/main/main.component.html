@@ -1,7 +1,11 @@
 <nz-layout>
-  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="triggerTemplate">
+  <nz-sider nzCollapsible
+            [(nzCollapsed)]="isCollapsed"
+            [nzBreakpoint]="'lg'"
+            [nzCollapsedWidth]="0"
+            >
     <div class="logo "></div>
-    <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
+    <ul nz-menu   [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
       <li nz-menu-item [routerLink]="['/manager/dashboard']">
         <span><i nz-icon type="home"></i><span class="nav-text">Trang chủ</span></span>
       </li>
@@ -16,9 +20,7 @@
         (click)="isCollapsed = !isCollapsed"></i>
 
       <nz-dropdown style="float: right;margin-right: 40px" [nzTrigger]="'click'">
-        <!-- <a></a> -->
-        <!-- <a nz-dropdown> {{currentUser.fullName}} <img class="img-admin" src="./assets/images/admin.jpg" alt=""> </a> -->
-        <a nz-dropdown><img class="img-admin" src="./assets/images/admin.jpg" alt=""> </a>
+        <a nz-dropdown> <strong></strong> <img class="img-admin" src="{{ user.avatar}}" alt=""> </a>
         <ul nz-menu style="margin-top: 20px">
           <li nz-menu-item [routerLink]="['/manager/profile']"><i nz-icon type="user"></i> Cá nhân</li>
           <li nz-menu-item (click)="logout()"><i nz-icon type="logout"></i> Đăng xuất</li>
@@ -34,6 +36,3 @@
     </nz-content>
   </nz-layout>
 </nz-layout>
-<ng-template #trigger>
-  <i nz-icon type="up"></i>
-</ng-template>

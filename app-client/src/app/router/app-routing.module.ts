@@ -13,7 +13,7 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     {
         path: 'manager', component: MainComponent, canActivate: [CanActivateService], children: [
-            { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+            { path: '', redirectTo: 'switchboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent },
             { path: 'switchboard', component: SwitchboardComponent },
         ]

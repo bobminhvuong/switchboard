@@ -11,12 +11,11 @@ import { environment } from './../../../environments/environment';
   providedIn: 'root'
 })
 export class SwitchboardService {
-  // private url = 'http://222.255.115.84:8000';
   private url = '222.255.115.84:8000';
   private key = '90a0ba95ec0c5d33fbdd342aec08bdce979ab724';
   private socket;
 
-  constructor(private http: HttpClient,private mainSV: MainService) {
+  constructor(private http: HttpClient, private mainSV: MainService) {
     this.socket = io(this.url);
   }
 
@@ -39,10 +38,12 @@ export class SwitchboardService {
       });
     });
   }
- 
+
   getCustomer(phone): Observable<any> {
-    let data ={
-      phone: phone
+    let curUser = this.mainSV.getCurrentUser();
+    let data = {
+      phone: phone,
+      api: curUser.api
     }
     return this.http.post(environment.APIHOST + '/api/voip/getcustomer', data, this.mainSV.getHttpOptionsNotToken())
       .pipe(
@@ -51,8 +52,10 @@ export class SwitchboardService {
   }
 
   getHistoryOrderCustomer(customer_id): Observable<any> {
-    let data ={
-      customer_id: customer_id
+    let curUser = this.mainSV.getCurrentUser();
+    let data = {
+      customer_id: customer_id,
+      api: curUser.api
     }
     return this.http.post(environment.APIHOST + '/api/voip/gethistory', data, this.mainSV.getHttpOptionsNotToken())
       .pipe(
@@ -61,8 +64,10 @@ export class SwitchboardService {
   }
 
   getDetailOrderCustomer(order_id): Observable<any> {
-    let data ={
-      order_id: order_id
+    let curUser = this.mainSV.getCurrentUser();
+    let data = {
+      order_id: order_id,
+      api: curUser.api
     }
     return this.http.post(environment.APIHOST + '/api/voip/getOrderDetail', data, this.mainSV.getHttpOptionsNotToken())
       .pipe(

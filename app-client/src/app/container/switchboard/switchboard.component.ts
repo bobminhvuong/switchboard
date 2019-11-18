@@ -1,3 +1,4 @@
+import { MainService } from './../../service/main.service';
 import { Component, OnInit } from '@angular/core';
 import { SwitchboardService } from 'src/app/service/switchboard/switchboard.service';
 import * as moment from 'moment';
@@ -123,23 +124,17 @@ export class SwitchboardComponent implements OnInit {
   public listOrder = [];
   public currentCus = {};
 
-  constructor(private switchboardSV: SwitchboardService, private message: NzMessageService) { }
+  constructor(private switchboardSV: SwitchboardService, private message: NzMessageService, private mainSV: MainService) { }
 
   ngOnInit() {
     this.switchboardSV.signSocket();
 
     this.switchboardSV.connection().subscribe(r => {
       console.log('connection', r);
-
     })
     this.switchboardSV.onResponse().subscribe(r => {
-      console.log('response', r);
-
       let index = this.listCall.findIndex(e => { return e.phone == r.phone });
       let indexHas = this.listCall.findIndex(e => { return e.phone == r.phone });
-
-      console.log('index', index);
-      console.log('indexHas', indexHas);
       r.timeOut = new Date();
 
       if (((r.state == 'Ring' || r.state == 'Ringing') && index < 0) || index < 0) {

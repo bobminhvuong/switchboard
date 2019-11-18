@@ -9,7 +9,7 @@ import { NzMessageService } from 'ng-zorro-antd/message'
 })
 export class LoginComponent implements OnInit {
   public user = {
-    usershop: 'iostest',
+    usershop: '',
     user: '',
     password: ''
   };
@@ -22,13 +22,18 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log(this.user);
-    
     this.loginSV.login(this.user).subscribe(r => {
-      console.log(r);
-      
       if (r && r.status == 1) {
-        localStorage.setItem('user', r.data);
+        let user = {
+          api: r.data.api,
+          name: r.data.TenNhanVien,
+          avatar: r.data.ImageUrl,
+          department: r.data.IDBoPhan,
+          id: r.data.ID,
+          expTime: r.data.expTime
+        };
+
+        localStorage.setItem('user', JSON.stringify(user));
         this.router.navigate(['/manager']);
       } else {
         this.message.create('error', r.message);

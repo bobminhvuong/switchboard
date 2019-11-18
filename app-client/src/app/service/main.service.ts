@@ -11,7 +11,7 @@ export class MainService {
   private origin = '';
   constructor(@Inject(DOCUMENT) private document: Document) {
     this.origin = this.document.location.origin;
-   }
+  }
 
   getHttpOptions() {
     const httpOptions = {
@@ -21,6 +21,11 @@ export class MainService {
       })
     };
     return httpOptions;
+  }
+
+  getCurrentUser() {
+    let user = localStorage.getItem('user');
+    return  user ? JSON.parse(user): {};
   }
 
   getHttpOptionsNotToken() {
@@ -33,7 +38,7 @@ export class MainService {
   }
 
   host() {
-    return  this.origin;
+    return this.origin;
   }
 
   host1() {

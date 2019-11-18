@@ -8,64 +8,15 @@
         </div>
         <div class="box-body">
           <div class="row listCus">
-            <!-- <div class="col-12 col-sm-6 col-md-6 col-lg-4">
-              <div class="card">
-                <img class="card-img-top" style="max-height:150px"
-                  src="https://photo-3-baomoi.zadn.vn/w1000_r1/2019_07_24_180_31578755/6a08480e114ef810a15f.jpg"
-                  alt="Card image cap">
-                <div class="card-body" style="padding-top: 5px;">
-                  <div class="row">
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
-
-                      <span class="ringing"><img style="margin-right: 3px;" width="16" height="16"
-                          src="./assets/images/incoming.png" alt=""> Ringing...</span>
-                    </div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                      <span><img width="22" height="22" src="./assets/images/phoneup.png" alt="">
-                        <span style="font-weight: bold;margin-top: 2px;" class="text-primary">306</span>
-                      </span>
-                    </div>
-                  </div>
-
-                  <div class="row mg-t-5">
-                    <i class="text-primary mg-icon" nz-icon nzType="user" nzTheme="outline"></i>
-                    <h6 class="card-title mg-l-5" style="margin-bottom: 0px !important;font-size: 18px;">Nguyễn văn a
-                    </h6>
-                  </div>
-
-                  <div class="row mg-t-5">
-                    <span class="badge badge-success">50000000 đ</span>
-                  </div>
-
-                  <div class="row mg-t-5">
-                    <i class="mg-icon text-primary" nz-icon [nzType]="'phone'"></i>
-                    <span class="mg-l-5">
-                      0399994511
-                    </span>
-                  </div>
-
-                  <div class="row mg-t-5">
-                    <i class="mg-icon text-primary" nz-icon [nzType]="'home'"></i>
-                    <span class="mg-l-5">
-                      610 hà huy giáp - quận 12
-                    </span>
-                  </div>
-
-                  <div class="row mg-t-10">
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
-                      <button class="btn btn-success btn-sm "><i class="fa fa-shopping-cart"></i> Đơn hàng</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-
-
-            <div *ngFor="let item of listCall" class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+            <div *ngFor="let item of listCall" class="col-xs-12 col-sm-6 col-md-6 col-lg-4" style="height: 370px;">
               <div class="card" style="margin-top: 10px;">
-                <img class="card-img-top" style="max-height:150px"
-                  src="https://photo-3-baomoi.zadn.vn/w1000_r1/2019_07_24_180_31578755/6a08480e114ef810a15f.jpg"
+                <img *ngIf="!item.avatar || item.avatar== ''"  class="card-img-top" style="max-height:170px"
+                  src="./assets/images/account.png"
                   alt="Card image cap">
+                <img *ngIf="item.avatar && item.avatar!= ''"  class="card-img-top" style="max-height:170px"
+                  src="{{ item.avatar }}"
+                  alt="Card image cap">
+
                 <div class="card-body" style="padding-top: 5px;">
                   <div class="row">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
@@ -107,12 +58,12 @@
                     </span>
                   </div>
 
-                  <div class="row mg-t-5">
+                  <!-- <div *ngIf="item.address && item.address != ''"  class="row mg-t-5">
                     <i class="mg-icon text-primary" nz-icon [nzType]="'home'"></i>
                     <span class="mg-l-5">
                       {{item.address}}
                     </span>
-                  </div>
+                  </div> -->
 
                   <div class="row mg-t-10">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
