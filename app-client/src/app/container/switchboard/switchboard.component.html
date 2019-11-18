@@ -10,12 +10,10 @@
           <div class="row listCus">
             <div *ngFor="let item of listCall" class="col-xs-12 col-sm-6 col-md-6 col-lg-4" style="height: 370px;">
               <div class="card" style="margin-top: 10px;">
-                <img *ngIf="!item.avatar || item.avatar== ''"  class="card-img-top" style="max-height:170px"
-                  src="./assets/images/account.png"
-                  alt="Card image cap">
-                <img *ngIf="item.avatar && item.avatar!= ''"  class="card-img-top" style="max-height:170px"
-                  src="{{ item.avatar }}"
-                  alt="Card image cap">
+                <img *ngIf="!item.avatar || item.avatar== ''" class="card-img-top" style="max-height:170px"
+                  src="./assets/images/account.png" alt="Card image cap">
+                <img *ngIf="item.avatar && item.avatar!= ''" class="card-img-top" style="max-height:170px"
+                  src="{{ item.avatar }}" alt="Card image cap">
 
                 <div class="card-body" style="padding-top: 5px;">
                   <div class="row">
@@ -89,41 +87,42 @@
         </div>
 
         <div class="box-body">
+          <div style="max-height: 55vh;overflow: auto">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th class="text-center">Thời gian</th>
+                    <th>Tên khách hàng</th>
+                    <th class="text-center">Điện thoại</th>
+                    <th class="text-center">Cuộc gọi</th>
+                    <th class="text-center">Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of listHasCall">
+                    <td class="text-center">{{item.time ? item.time : ''}}</td>
+                    <td>{{item.name}}</td>
+                    <td class="text-center">{{item.phone}}</td>
+                    <td class="text-center">
+                      <img *ngIf="item.type=='inbound'" style="margin-right: 3px;" width="16" height="16"
+                        src="./assets/images/incoming.png" alt="">
 
-          <div class="table-responsive">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th class="text-center">Thời gian</th>
-                  <th>Tên khách hàng</th>
-                  <th class="text-center">Điện thoại</th>
-                  <th class="text-center">Cuộc gọi</th>
-                  <th class="text-center">Thao tác</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of listHasCall">
-                  <td class="text-center">{{item.time ? item.time : ''}}</td>
-                  <td>{{item.name}}</td>
-                  <td class="text-center">{{item.phone}}</td>
-                  <td class="text-center">
-                    <img *ngIf="item.type=='inbound'" style="margin-right: 3px;" width="16" height="16"
-                      src="./assets/images/incoming.png" alt="">
+                      <img *ngIf="item.type=='outbound'" style="margin-right: 3px;" width="16" height="16"
+                        src="./assets/images/outgoing.png" alt="">
 
-                    <img *ngIf="item.type=='outbound'" style="margin-right: 3px;" width="16" height="16"
-                      src="./assets/images/outgoing.png" alt="">
-
-                    <strong>{{item.extend}}</strong>
-                  </td>
-                  <td class="text-center">
-                    <button class="btn btn-sm" (click)="getHistoryCart(item)" [disabled]="item.customer_id==0"
-                      [ngClass]="{'btn-success': item.customer_id != 0,'btn-secondary': item.customer_id == 0}">
-                      <i class="fa fa-shopping-cart"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                      <strong>{{item.extend}}</strong>
+                    </td>
+                    <td class="text-center">
+                      <button class="btn btn-sm" (click)="getHistoryCart(item)" [disabled]="item.customer_id==0"
+                        [ngClass]="{'btn-success': item.customer_id != 0,'btn-secondary': item.customer_id == 0}">
+                        <i class="fa fa-shopping-cart"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
