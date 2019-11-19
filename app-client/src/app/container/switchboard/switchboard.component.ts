@@ -158,19 +158,18 @@ export class SwitchboardComponent implements OnInit {
   getCustomer(phone) {
     this.switchboardSV.getCustomer(phone).subscribe(cus => {
       if (cus.status == 1) {
-        console.log('cus',cus);
-        
-        let index = this.listCall.findIndex(e => { return e.phone == phone });
-        let indexHas = this.listCall.findIndex(e => { return e.phone == phone });
+        let index = this.listCall.findIndex(e => { return e.phone == cus.data.phone });
+        let indexHas = this.listCall.findIndex(e => { return e.phone == cus.data.phone });
+
         this.listCall[index].customer_id = cus.data.id;
         this.listCall[index].name = cus.data.name;
         this.listCall[index].group_name = cus.data.group_name;
         this.listCall[index].money = cus.data.money;
 
-        this.listHasCall[index].customer_id = cus.data.id;
-        this.listHasCall[index].name = cus.data.name;
-        this.listHasCall[index].group_name = cus.data.group_name;
-        this.listHasCall[index].money = cus.data.money;
+        this.listHasCall[indexHas].customer_id = cus.data.id;
+        this.listHasCall[indexHas].name = cus.data.name;
+        this.listHasCall[indexHas].group_name = cus.data.group_name;
+        this.listHasCall[indexHas].money = cus.data.money;
        
       } 
     });
