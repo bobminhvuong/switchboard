@@ -135,7 +135,7 @@ export class SwitchboardComponent implements OnInit {
     this.switchboardSV.onResponse().subscribe(r => {
       let index = this.listCall.findIndex(e => { return e.phone == r.phone });
       let indexHas = this.listHasCall.findIndex(e => { return e.phone == r.phone });
-      if(r.state == 'Hangup') r.timeOut = new Date();
+      r.timeOut = new Date();
 
       if ( index < 0 ) {
         r.time = moment().format('HH:mm');
@@ -143,12 +143,17 @@ export class SwitchboardComponent implements OnInit {
         r.name = 'Uknown';
         r.group_name = '';
         r.money = 0;
+        if(r.state == 'Hangup') r.timeOut = new Date();
         this.listCall.unshift(r);
         this.listHasCall.unshift(r);
         this.getCustomer(r.phone);
       } else {
-        this.listHasCall[indexHas].state = r.state;
+        if(r.state == 'Hangup'){
+          this.listCall[indexHas].timeOut = new Date();
+          this.listHasCall[indexHas].timeOut = new Date();
+        }
         this.listCall[index].state = r.state;
+        this.listHasCall[indexHas].state = r.state;
       }
     });
 
