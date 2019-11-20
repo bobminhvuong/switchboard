@@ -135,10 +135,10 @@ export class SwitchboardComponent implements OnInit {
     this.switchboardSV.onResponse().subscribe(r => {
       let index = this.listCall.findIndex(e => { return e.phone == r.phone });
       let indexHas = this.listHasCall.findIndex(e => { return e.phone == r.phone });
-      r.timeOut = new Date();
 
-      if (((r.state == 'Ring' || r.state == 'Ringing') && index < 0) || index < 0) {
+      if ( index < 0 ) {
         r.time = moment().format('HH:mm');
+        r.timeOut = new Date();
         r.customer_id = 0;
         r.name = 'Uknow';
         r.group_name = '';
