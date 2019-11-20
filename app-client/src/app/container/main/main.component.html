@@ -20,7 +20,9 @@
         (click)="isCollapsed = !isCollapsed"></i>
 
       <nz-dropdown style="float: right;margin-right: 40px" [nzTrigger]="'click'">
-        <a nz-dropdown> <strong></strong> <img class="img-admin" src="{{ user.avatar}}" alt=""> </a>
+        <a nz-dropdown> <strong></strong> 
+          <img *ngIf="user.avatar && user.avatar !=''" class="img-admin" src="{{ user.avatar}}" alt=""> 
+          <img *ngIf="!(user.avatar && user.avatar !='')" class="img-admin" src="./assets/images/account.png" alt=""> </a>
         <ul nz-menu style="margin-top: 20px">
           <li nz-menu-item [routerLink]="['/manager/profile']"><i nz-icon type="user"></i> Cá nhân</li>
           <li nz-menu-item (click)="logout()"><i nz-icon type="logout"></i> Đăng xuất</li>

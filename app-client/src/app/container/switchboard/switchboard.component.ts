@@ -140,7 +140,7 @@ export class SwitchboardComponent implements OnInit {
       if (((r.state == 'Ring' || r.state == 'Ringing') && index < 0) || index < 0) {
         r.time = moment().format('HH:mm');
         r.customer_id = 0;
-        r.name = '';
+        r.name = 'Uknow';
         r.group_name = '';
         r.money = 0;
         this.listCall.unshift(r);
@@ -157,10 +157,12 @@ export class SwitchboardComponent implements OnInit {
 
   getCustomer(phone) {
     this.switchboardSV.getCustomer(phone).subscribe(cus => {
-      if (cus.status == 1) {
-        let index = this.listCall.findIndex(e => { return e.phone == cus.data.phone });
+      if (cus.status == 1 && cus.data.id != 0) {
+        console.log('cus',cus);
+        
+        let index = this.listCall.findIndex(e => { return  e.phone == cus.data.phone });
         let indexHas = this.listCall.findIndex(e => { return e.phone == cus.data.phone });
-
+        
         this.listCall[index].customer_id = cus.data.id;
         this.listCall[index].name = cus.data.name;
         this.listCall[index].group_name = cus.data.group_name;
