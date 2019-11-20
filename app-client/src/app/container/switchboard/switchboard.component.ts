@@ -140,7 +140,7 @@ export class SwitchboardComponent implements OnInit {
       if ( index < 0 ) {
         r.time = moment().format('HH:mm');
         r.customer_id = 0;
-        r.name = 'Uknow';
+        r.name = 'Uknown';
         r.group_name = '';
         r.money = 0;
         this.listCall.unshift(r);
@@ -183,10 +183,11 @@ export class SwitchboardComponent implements OnInit {
 
   setTimeClose = function () {
     setTimeout(() => {
-      var tmp = [];
       this.listCall.forEach(i => {
         this.timeOut = new Date();
-        if (i.state == 'Hangup' && (this.timeOut - i.timeOut) >= 7000) {
+        console.log('time',this.timeOut - i.timeOut);
+        
+        if (i.state == 'Hangup' && (this.timeOut - i.timeOut) >= 5000) {
           let index = this.listCall.findIndex(e => { return e.phone == i.phone; });
           this.listCall.splice(index, 1);
         }
