@@ -23,10 +23,10 @@
                     <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
                       <span class=""
                         [ngClass]="{ 'ringing': (item.state == 'Ringing' || item.state == 'Ring'), 'up' : item.state == 'Up', 'handup':item.state == 'Hangup' }">
-                        <img *ngIf="item.type=='inbound'" style="margin-right: 3px;" width="16" height="16"
+                        <!-- <img *ngIf="item.type=='inbound'" style="margin-right: 3px;" width="16" height="16"
                           src="./assets/images/incoming.png" alt="">
                         <img *ngIf="item.type=='outbound'" style="margin-right: 3px;" width="16" height="16"
-                          src="./assets/images/outgoing.png" alt="">
+                          src="./assets/images/outgoing.png" alt=""> -->
 
                         {{ item.state }}...</span>
                     </div>
@@ -44,7 +44,7 @@
 
                   <div class="row mg-t-5">
                     <i class="text-primary mg-icon" nz-icon nzType="user" nzTheme="outline"></i>
-                    <h6 class="card-title mg-l-5" style="margin-bottom: 0px !important;font-size: 18px;">{{ item.name }}
+                    <h6 class="card-title mg-l-5" style="margin-bottom: 0px !important;font-size: 17px;">{{ item.name }}
                     </h6>
                   </div>
 
@@ -98,7 +98,7 @@
                     <th class="text-center">Thời gian</th>
                     <th>Tên khách hàng</th>
                     <th class="text-center">Điện thoại</th>
-                    <th class="text-center">Cuộc gọi</th>
+                    <th class="text-center">Trạng thái</th>
                     <th class="text-center">Thao tác</th>
                   </tr>
                 </thead>
@@ -107,17 +107,12 @@
                     <td class="text-center">{{item.time ? item.time : ''}}</td>
                     <td>{{item.name}}</td>
                     <td class="text-center">{{item.phone}}</td>
-                    <td class="text-center">
-                      <img *ngIf="item.type=='inbound'" style="margin-right: 3px;" width="16" height="16"
-                        src="./assets/images/incoming.png" alt="">
-
-                      <img *ngIf="item.type=='outbound'" style="margin-right: 3px;" width="16" height="16"
-                        src="./assets/images/outgoing.png" alt="">
-
-                      <strong>{{item.extend}}</strong>
+                    <td  class="text-center">
+                        <span *ngIf="item.call_status && item.call_status=='Missed'" class="badge badge-danger">Missed</span>
+                        <span *ngIf="item.call_status && item.call_status=='Answered'" class="badge badge-success">Answered</span>
                     </td>
                     <td class="text-center">
-                        <button (click)="onpenModalNote(item)" [disabled]="item.customer_id==0"
+                        <button style="margin-right: 5px;" (click)="onpenModalNote(item)"
                         class="btn btn-primary btn-sm cus-btn ">
                         <i class="fa fa-edit"></i>
                       </button>

@@ -11,110 +11,118 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class SwitchboardComponent implements OnInit {
 
-  private listCall = [
-    {
-      extend: 304,
-      state: 'Up',
-      phone: '03999294511',
-      callid: '12312312',
-      type: 'outbound',
-      name: 'Vuownhg minh nguyễn',
-      address: '610 hà huy giáp',
-      customer_id: 0,
-      money: 0,
-      timeOut: new Date()
-    },
-    {
-      extend: 304,
-      state: 'Ring',
-      phone: '03999394511',
-      callid: '12312312',
-      type: 'inbound',
-      name: 'Vuownhg minh nguyễn',
-      address: '610 hà huy giáp',
-      customer_id: 43,
-      money: 0,
-      timeOut: new Date()
-    },
-    {
-      extend: 304,
-      state: 'Hangup',
-      phone: '03999944511',
-      callid: '12312312',
-      type: 'outbound',
-      name: 'Vuownhg minh nguyễn',
-      address: '610 hà huy giáp',
-      customer_id: 0,
-      money: 0,
-      timeOut: new Date()
-    },
-    {
-      extend: 304,
-      state: 'Ringing',
-      phone: '03999942511',
-      callid: '12312312',
-      type: 'inbound',
-      name: 'Vuownhg minh nguyễn',
-      address: '610 hà huy giáp',
-      customer_id: 123,
-      money: 0,
-      timeOut: new Date()
+  // private listCall = [
+  //   {
+  //     extend: 304,
+  //     state: 'Up',
+  //     phone: '03999294511',
+  //     callid: '12312312',
+  //     type: 'outbound',
+  //     name: 'Vuownhg minh nguyễn',
+  //     address: '610 hà huy giáp',
+  //     customer_id: 0,
+  //     money: 0,
+  //     timeOut: new Date(),
+  //     call_status:''
+  //   },
+  //   {
+  //     extend: 304,
+  //     state: 'Ring',
+  //     phone: '03999394511',
+  //     callid: '12312312',
+  //     type: 'inbound',
+  //     name: 'Vuownhg minh nguyễn',
+  //     address: '610 hà huy giáp',
+  //     customer_id: 43,
+  //     money: 0,
+  //     timeOut: new Date(),
+  //     call_status:''
+  //   },
+  //   {
+  //     extend: 304,
+  //     state: 'Hangup',
+  //     phone: '03999944511',
+  //     callid: '12312312',
+  //     type: 'outbound',
+  //     name: 'Vuownhg minh nguyễn',
+  //     address: '610 hà huy giáp',
+  //     customer_id: 0,
+  //     money: 0,
+  //     timeOut: new Date(),
+  //     call_status:''
+  //   },
+  //   {
+  //     extend: 304,
+  //     state: 'Ringing',
+  //     phone: '03999942511',
+  //     callid: '12312312',
+  //     type: 'inbound',
+  //     name: 'Vuownhg minh nguyễn',
+  //     address: '610 hà huy giáp',
+  //     customer_id: 123,
+  //     money: 0,
+  //     timeOut: new Date(),
+  //     call_status:''
 
-    }
-  ];
-  private listHasCall = [
-    {
-      extend: 304,
-      state: 'Ringing',
-      phone: '03999934511',
-      callid: '12312312',
-      type: 'outbound',
-      name: 'Vuownhg minh nguyễn',
-      address: '610 hà huy giáp',
-      customer_id: 232,
-      money: 0,
-      timeOut: new Date()
-    },
-    {
-      extend: 304,
-      state: 'Ring',
-      phone: '03999944511',
-      callid: '12312312',
-      type: 'inbound',
-      name: 'Vuownhg minh nguyễn',
-      address: '610 hà huy giáp',
-      customer_id: 0,
-      money: 0,
-      timeOut: new Date()
-    },
-    {
-      extend: 304,
-      state: 'Ring',
-      phone: '03999942511',
-      callid: '12312312',
-      type: 'outbound',
-      name: 'Vuownhg minh nguyễn',
-      address: '610 hà huy giáp',
-      customer_id: 12,
-      money: 0,
-      timeOut: new Date()
-    },
-    {
-      extend: 304,
-      state: 'Ring',
-      phone: '03999294511',
-      callid: '12312312',
-      type: 'inbound',
-      name: 'Vuownhg minh nguyễn',
-      address: '610 hà huy giáp',
-      customer_id: 0,
-      money: 0,
-      timeOut: new Date()
-    }
-  ];
+  //   }
+  // ];
+  // private listHasCall = [
+  //   {
+  //     extend: 304,
+  //     state: 'Ringing',
+  //     phone: '03999934511',
+  //     callid: '12312312',
+  //     type: 'outbound',
+  //     name: 'Vuownhg minh nguyễn',
+  //     address: '610 hà huy giáp',
+  //     customer_id: 232,
+  //     money: 0,
+  //     timeOut: new Date(),
+  //     call_status:''
+  //   },
+  //   {
+  //     extend: 304,
+  //     state: 'Ring',
+  //     phone: '03999944511',
+  //     callid: '12312312',
+  //     type: 'inbound',
+  //     name: 'Vuownhg minh nguyễn',
+  //     address: '610 hà huy giáp',
+  //     customer_id: 0,
+  //     money: 0,
+  //     timeOut: new Date(),
+  //     call_status:''
+  //   },
+  //   {
+  //     extend: 304,
+  //     state: 'Ring',
+  //     phone: '03999942511',
+  //     callid: '12312312',
+  //     type: 'outbound',
+  //     name: 'Vuownhg minh nguyễn',
+  //     address: '610 hà huy giáp',
+  //     customer_id: 12,
+  //     money: 0,
+  //     timeOut: new Date(),
+  //     call_status:''
+  //   },
+  //   {
+  //     extend: 304,
+  //     state: 'Ring',
+  //     phone: '03999294511',
+  //     callid: '12312312',
+  //     type: 'inbound',
+  //     name: 'Vuownhg minh nguyễn',
+  //     address: '610 hà huy giáp',
+  //     customer_id: 0,
+  //     money: 0,
+  //     timeOut: new Date(),
+  //     call_status:''
+  //   }
+  // ];
 
-  // public listCall = [];
-  // public listHasCall = [];
+  public listCall = [];
+  public listHasCall = [];
 
   public isVisible = false;
   public isVisibleNote = false;
@@ -150,6 +158,7 @@ export class SwitchboardComponent implements OnInit {
             r.name = 'Uknown';
             r.group_name = '';
             r.money = 0;
+            r.call_state = '';
             if(r.state == 'Hangup') r.timeOut = new Date();
             this.listCall.unshift(r);
             this.listHasCall.unshift(r);
@@ -159,7 +168,9 @@ export class SwitchboardComponent implements OnInit {
             this.listHasCall[indexHas].state = r.state;
           }
         }else{
+          
           if(r.state == 'Hangup' && index >=0){
+            this.listHasCall[indexHas].call_state = (this.listHasCall[indexHas].state =='Ringing' || this.listHasCall[indexHas].state =='Ring') ? 'Missed' : 'Answered';
             this.listCall[index].timeOut = new Date();
             this.listHasCall[indexHas].timeOut = new Date();
             this.listCall[index].state = r.state;
