@@ -50,5 +50,5 @@ app.get('/', function (req, res) {
      res.sendFile(path.join(__dirname + '/app-client/dist/index.html'));
 });
 
-// app.listen(process.env.PORT || config.PORT, console.log('server is listening port ' + config.PORT));
-app.listen(process.env.PORT || config.PORT,'192.168.1.22', console.log('server is listening port ' + config.PORT));
+app.listen(process.env.PORT || config.PORT, console.log('server is listening port ' + config.PORT));
+// app.listen(process.env.PORT || config.PORT,'192.168.1.22', console.log('server is listening port ' + config.PORT));
