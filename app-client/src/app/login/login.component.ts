@@ -2,27 +2,32 @@ import { LoginService } from './../service/auth/login.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message'
+import { FormBuilder, FormGroup,Validators  } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  public user = {
-    usershop: '',
-    user: '',
-    password: ''
-  };
-  constructor(private router: Router, private loginSV: LoginService, private message: NzMessageService) { }
+  validateForm: FormGroup;
+  
+  constructor(private fb: FormBuilder,private router: Router, private loginSV: LoginService, private message: NzMessageService) { }
 
   ngOnInit() {
     if (localStorage.getItem('user')) {
       this.router.navigate(['/manager']);
     }
+
+    this.validateForm = this.fb.group({
+      usershop: [null, [Validators.required]],
+      user: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+    });
+
   }
 
-  login() {
-    this.loginSV.login(this.user).subscribe(r => {
+  login(data) {
+    this.loginSV.login(data).subscribe(r => {
       if (r && r.status == 1) {
         let user = {
           api: r.data.api,
@@ -39,5 +44,15 @@ export class LoginComponent implements OnInit {
         this.message.create('error', r.message);
       }
     });
+  }
+
+  submitForm(): void {
+    for (const i in this.validateForm.controls) {
+      this.validateForm.controls[i].markAsDirty();
+      this.validateForm.controls[i].updateValueAndValidity();
+    }
+    if(this.validateForm.valid){
+      this.login(this.validateForm.value);
+    }
   }
 }
