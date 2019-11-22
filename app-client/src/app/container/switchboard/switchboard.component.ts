@@ -133,27 +133,31 @@ export class SwitchboardComponent implements OnInit {
       console.log('connection', r);
     })
     this.switchboardSV.onResponse().subscribe(r => {
-      let index = this.listCall.findIndex(e => { return e.phone == r.phone });
-      let indexHas = this.listHasCall.findIndex(e => { return e.phone == r.phone });
+      let index = this.listCall.findIndex(e => { return e.callid == r.callid });
+      let indexHas = this.listHasCall.findIndex(e => { return e.callid == r.callid });
       r.timeOut = new Date();
 
-      if ( index < 0 ) {
-        r.time = moment().format('HH:mm');
-        r.customer_id = 0;
-        r.name = 'Uknown';
-        r.group_name = '';
-        r.money = 0;
-        if(r.state == 'Hangup') r.timeOut = new Date();
-        this.listCall.unshift(r);
-        this.listHasCall.unshift(r);
-        this.getCustomer(r.phone);
-      } else {
-        if(r.state == 'Hangup'){
-          this.listCall[indexHas].timeOut = new Date();
-          this.listHasCall[indexHas].timeOut = new Date();
+      if(r.phone.length >= 8){
+        if(r.type =='inbound' || index > 0 ){
+          if ( index < 0 ) {
+            r.time = moment().format('HH:mm');
+            r.customer_id = 0;
+            r.name = 'Uknown';
+            r.group_name = '';
+            r.money = 0;
+            if(r.state == 'Hangup') r.timeOut = new Date();
+            this.listCall.unshift(r);
+            this.listHasCall.unshift(r);
+            this.getCustomer(r.phone);
+          } else {
+            if(r.state == 'Hangup'){
+              this.listCall[indexHas].timeOut = new Date();
+              this.listHasCall[indexHas].timeOut = new Date();
+            }
+            this.listCall[index].state = r.state;
+            this.listHasCall[indexHas].state = r.state;
+          }
         }
-        this.listCall[index].state = r.state;
-        this.listHasCall[indexHas].state = r.state;
       }
     });
 
@@ -176,7 +180,6 @@ export class SwitchboardComponent implements OnInit {
         this.listHasCall[indexHas].name = cus.data.name;
         this.listHasCall[indexHas].group_name = cus.data.group_name;
         this.listHasCall[indexHas].money = cus.data.money;
-       
       } 
     });
   }
@@ -192,7 +195,7 @@ export class SwitchboardComponent implements OnInit {
         this.timeOut = new Date();
         console.log('time',this.timeOut - i.timeOut);
         
-        if (i.state == 'Hangup' && (this.timeOut - i.timeOut) >= 5000) {
+        if ((i.state == 'Hangup' || i.state =='') && (this.timeOut - i.timeOut) >= 5000) {
           let index = this.listCall.findIndex(e => { return e.phone == i.phone; });
           this.listCall.splice(index, 1);
         }

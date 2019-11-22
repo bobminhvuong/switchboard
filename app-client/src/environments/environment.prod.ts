@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  APIHOST: 'http://ancungfriend.herokuapp.com'
+  APIHOST: 'http://103.255.238.162'
 };
