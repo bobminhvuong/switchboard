@@ -46,6 +46,14 @@ app.post('/api/voip/getOrderDetail', function (req, res){
      })
 });
 
+app.post('/api/voip/creatednote', function (req, res){
+     axios.post('http://services.quanlyshop.vn/api/voip/creatednote',req.body).then(r=>{
+          if (r) res.send(r.data);
+     }).catch(r => {
+          if (r) res.send(r.response.data);
+     })
+});
+
 app.get('/', function (req, res) {
      res.sendFile(path.join(__dirname + '/app-client/dist/index.html'));
 });

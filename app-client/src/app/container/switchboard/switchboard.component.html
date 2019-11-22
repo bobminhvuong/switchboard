@@ -13,8 +13,8 @@
           <div class="row listCus">
             <div *ngFor="let item of listCall" class="col-xs-12 col-sm-6 col-md-6 col-lg-4" style="height: 370px;">
               <div class="card" style="margin-top: 10px;">
-                <img class="card-img-top" style="max-height:170px"
-                  src="./assets/images/account.png" alt="Card image cap">
+                <img class="card-img-top" style="max-height:170px" src="./assets/images/account.png"
+                  alt="Card image cap">
                 <!-- <img *ngIf="item.avatar && item.avatar!= ''" class="card-img-top" style="max-height:170px"
                   src="{{ item.avatar }}" alt="Card image cap"> -->
 
@@ -117,7 +117,12 @@
                       <strong>{{item.extend}}</strong>
                     </td>
                     <td class="text-center">
-                      <button class="btn btn-sm" (click)="getHistoryCart(item)" [disabled]="item.customer_id==0"
+                        <button (click)="onpenModalNote(item)" [disabled]="item.customer_id==0"
+                        class="btn btn-primary btn-sm cus-btn ">
+                        <i class="fa fa-edit"></i>
+                      </button>
+
+                      <button class="btn btn-sm cus-btn" (click)="getHistoryCart(item)" [disabled]="item.customer_id==0"
                         [ngClass]="{'btn-success': item.customer_id != 0,'btn-secondary': item.customer_id == 0}">
                         <i class="fa fa-shopping-cart"></i>
                       </button>
@@ -178,7 +183,8 @@
               <td class="float-right"> {{ formatNumber(item.total)}} </td>
               <td class="text-center">
 
-                <span (click)="getOrderDetail(item.id)" style="cursor: pointer;" class="badge badge-success"><i class="fas fa-info"></i> Chi
+                <span (click)="getOrderDetail(item.id)" style="cursor: pointer;" class="badge badge-success"><i
+                    class="fas fa-info"></i> Chi
                   tiết</span>
               </td>
             </tr>
@@ -230,6 +236,31 @@
 
     <ng-template #modalFooter>
       <button nz-button nzType="default" (click)="handleCancel()">Đóng</button>
+    </ng-template>
+  </nz-modal>
+
+  <nz-modal [(nzVisible)]="isVisibleNote" [nzWidth]="600" [nzTitle]="modalTitle" [nzContent]="modalContent"
+    [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()">
+    <ng-template #modalTitle>
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+          <b>Ghi chú cuộc gọi</b>
+        </div>
+        <div class="col-12 col-sm-12 col-md-4 col-lg-4">
+          {{ call && call.phone ? call.phone : '' }}
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template #modalContent>
+      <div class="row">
+            <textarea [(ngModel)]="call.note" rows="4" style="width: 100%;" class="form-control" id="" placeholder="Nhập ghi chú"></textarea>
+      </div>
+    </ng-template>
+
+    <ng-template #modalFooter>
+      <button nz-button nzType="default" (click)="handleCancel()">Đóng</button>
+      <button nz-button nzType="primary" (click)="saveNote()">Lưu</button>
     </ng-template>
   </nz-modal>
 </div>

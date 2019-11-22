@@ -74,4 +74,15 @@ export class SwitchboardService {
         catchError(this.mainSV.handleError)
       );
   }
+
+  
+  createNote(data): Observable<any>{
+    let curUser = this.mainSV.getCurrentUser();
+    let req = data;
+    req.api = curUser.api;
+    return this.http.post(environment.APIHOST + '/api/voip/creatednote', data, this.mainSV.getHttpOptionsNotToken())
+      .pipe(
+        catchError(this.mainSV.handleError)
+      );
+  }
 }
