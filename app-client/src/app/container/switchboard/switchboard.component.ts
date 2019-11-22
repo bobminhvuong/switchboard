@@ -138,7 +138,7 @@ export class SwitchboardComponent implements OnInit {
       r.timeOut = new Date();
 
       if(r.phone.length >= 8){
-        if(r.type =='inbound' || index > 0 ){
+        if(r.type =='inbound' ){
           if ( index < 0 ) {
             r.time = moment().format('HH:mm');
             r.customer_id = 0;
@@ -150,10 +150,13 @@ export class SwitchboardComponent implements OnInit {
             this.listHasCall.unshift(r);
             this.getCustomer(r.phone);
           } else {
-            if(r.state == 'Hangup'){
-              this.listCall[indexHas].timeOut = new Date();
-              this.listHasCall[indexHas].timeOut = new Date();
-            }
+            this.listCall[index].state = r.state;
+            this.listHasCall[indexHas].state = r.state;
+          }
+        }else{
+          if(r.state == 'Hangup' && index >=0){
+            this.listCall[index].timeOut = new Date();
+            this.listHasCall[indexHas].timeOut = new Date();
             this.listCall[index].state = r.state;
             this.listHasCall[indexHas].state = r.state;
           }
