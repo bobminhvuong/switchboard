@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  APIHOST: 'http://voip.pkgr.vn'
+  APIHOST: 'http://ancungfriend.herokuapp.com'
 };
